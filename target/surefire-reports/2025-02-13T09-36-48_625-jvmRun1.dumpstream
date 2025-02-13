@@ -1,0 +1,213 @@
+# Created at 2025-02-13T09:36:49.826
+TestSet has not finished before stream error has appeared >> initializing exit by non-null configuration: DEFAULT
+java.io.EOFException
+	at java.base/java.io.DataInputStream.readFully(DataInputStream.java:210)
+	at java.base/java.io.DataInputStream.readInt(DataInputStream.java:385)
+	at org.apache.maven.surefire.booter.MasterProcessCommand.decode(MasterProcessCommand.java:115)
+	at org.apache.maven.surefire.booter.CommandReader$CommandRunnable.run(CommandReader.java:391)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+
+
+# Created at 2025-02-13T09:36:50.442
+Unexpected IOException with stream: Feb 13, 2025 9:36:50 AM org.openqa.selenium.remote.ProtocolHandshake createSession
+INFO: Detected dialect: W3C
+
+
+# Created at 2025-02-13T09:36:50.489
+Unexpected IOException with stream: Feb 13, 2025 9:36:50 AM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 132, so returning the closest version found: a no-op implementation
+
+
+# Created at 2025-02-13T09:36:50.489
+Unexpected IOException with stream: Feb 13, 2025 9:36:50 AM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+INFO: Unable to find CDP implementation matching 132.
+
+
+# Created at 2025-02-13T09:36:50.490
+Unexpected IOException with stream: Feb 13, 2025 9:36:50 AM org.openqa.selenium.chromium.ChromiumDriver lambda$new$3
+WARNING: Unable to find version of CDP to use for . You may need to include a dependency on a specific version of the CDP using something similar to `org.seleniumhq.selenium:selenium-devtools-v86:4.0.0` where the version ("v86") matches the version of the chromium-based browser you're using and the version number of the artifact is the same as Selenium's.
+
+
+# Created at 2025-02-13T09:36:50.500
+Unexpected IOException with stream: Driver initialized: ChromeDriver: chrome on WINDOWS (ceca5e3069e291a74a2e8cec203d76b6)
+
+
+# Created at 2025-02-13T09:36:50.582
+Unexpected IOException with stream: Before getting driver: ChromeDriver: chrome on WINDOWS (ceca5e3069e291a74a2e8cec203d76b6)
+
+
+# Created at 2025-02-13T09:36:51.876
+Unexpected IOException with stream:   Given User navigate to working holiday web page                     # com.stepdefinitions.momform.StageOne.user_navigate_to_working_holiday_web_page()
+
+
+# Created at 2025-02-13T09:37:01.951
+Unexpected IOException with stream:   When User proceed to Stage 1 Application Page                       # com.stepdefinitions.momform.StageOne.proceed_first_app_page()
+
+
+# Created at 2025-02-13T09:37:01.952
+Unexpected IOException with stream:       org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.xpath: //*[text()='Skip'] (tried for 10 second(s) with 500 milliseconds interval)
+Build info: version: '4.0.0', revision: '3a21814679'
+System info: host: 'CHOOND16', ip: '192.168.110.219', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '21.0.4'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 132.0.6834.196, chrome: {chromedriverVersion: 132.0.6834.110 (df453a35f09..., userDataDir: C:\Users\chien\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:25282}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), se:cdp: ws://localhost:25282/devtoo..., se:cdpVersion: 132.0.6834.196, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: ceca5e3069e291a74a2e8cec203d76b6
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:138)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:231)
+	at com.commoncomponents.CommonComponent.checkTextVisible(CommonComponent.java:103)
+	at com.commoncomponents.CommonComponent.click_button_or_hyperlink(CommonComponent.java:133)
+	at com.stepdefinitions.momform.StageOne.proceed_first_app_page(StageOne.java:51)
+	at ✽.User proceed to Stage 1 Application Page(file:///D:/Java-Selenium/Work-Holiday-Pass/src/test/resources/features/MomForm/StageOne.feature:6)
+
+
+
+# Created at 2025-02-13T09:37:02.095
+Unexpected IOException with stream: Driver quit successfully.
+
+
+# Created at 2025-02-13T09:37:02.106
+Unexpected IOException with stream: 
+
+
+# Created at 2025-02-13T09:37:02.108
+Unexpected IOException with stream: @fast
+
+
+# Created at 2025-02-13T09:37:02.108
+Unexpected IOException with stream: Scenario: US004 Select invalid country and user not eligible for a Work Holiday Pass # src/test/resources/features/MomForm/StageOne.feature:16
+
+
+# Created at 2025-02-13T09:37:02.108
+Unexpected IOException with stream: Driver initialized: ChromeDriver: chrome on WINDOWS (ceca5e3069e291a74a2e8cec203d76b6)
+
+
+# Created at 2025-02-13T09:37:02.109
+Unexpected IOException with stream: Before getting driver: ChromeDriver: chrome on WINDOWS (ceca5e3069e291a74a2e8cec203d76b6)
+
+
+# Created at 2025-02-13T09:37:02.863
+Unexpected IOException with stream:   Given User navigate to working holiday web page                                    # com.stepdefinitions.momform.StageOne.user_navigate_to_working_holiday_web_page()
+
+
+# Created at 2025-02-13T09:37:02.871
+Unexpected IOException with stream: Driver quit successfully.
+
+
+# Created at 2025-02-13T09:37:02.879
+Unexpected IOException with stream: 
+
+
+# Created at 2025-02-13T09:37:02.879
+Unexpected IOException with stream: @test
+
+
+# Created at 2025-02-13T09:37:02.880
+Unexpected IOException with stream: Scenario: US005 Proceed stage 2 with worked/studied/stayed in Singapore in the past, and remember fin number # src/test/resources/features/MomForm/StageOne.feature:25
+
+
+# Created at 2025-02-13T09:37:02.880
+Unexpected IOException with stream: Driver initialized: ChromeDriver: chrome on WINDOWS (ceca5e3069e291a74a2e8cec203d76b6)
+
+
+# Created at 2025-02-13T09:37:02.882
+Unexpected IOException with stream: Before getting driver: ChromeDriver: chrome on WINDOWS (ceca5e3069e291a74a2e8cec203d76b6)
+
+
+# Created at 2025-02-13T09:37:03.222
+Unexpected IOException with stream:   Given User navigate to working holiday web page                                                            # com.stepdefinitions.momform.StageOne.user_navigate_to_working_holiday_web_page()
+
+
+# Created at 2025-02-13T09:37:03.228
+Unexpected IOException with stream: Driver quit successfully.
+
+
+# Created at 2025-02-13T09:37:03.249
+Unexpected IOException with stream: 
+
+
+# Created at 2025-02-13T09:37:03.250
+Unexpected IOException with stream: @positive
+
+
+# Created at 2025-02-13T09:37:03.251
+Unexpected IOException with stream: Scenario: User fills out the form with valid details           # src/test/resources/features/TechnicalTestForm/TestForm.feature:4
+
+
+# Created at 2025-02-13T09:37:03.252
+Unexpected IOException with stream: Driver initialized: ChromeDriver: chrome on WINDOWS (ceca5e3069e291a74a2e8cec203d76b6)
+
+
+# Created at 2025-02-13T09:37:03.253
+Unexpected IOException with stream: Before getting driver: ChromeDriver: chrome on WINDOWS (ceca5e3069e291a74a2e8cec203d76b6)
+
+
+# Created at 2025-02-13T09:37:03.877
+Unexpected IOException with stream: Text is now visible: 1.First Name
+
+
+# Created at 2025-02-13T09:37:03.877
+Unexpected IOException with stream:   Given User navigates to test form page                       # com.stepdefinitions.testform.TestForm.navigateTestPage()
+
+
+# Created at 2025-02-13T09:37:04.044
+Unexpected IOException with stream:   When User enters first name: "John"                          # com.stepdefinitions.testform.TestForm.userEntersFirstName(java.lang.String)
+
+
+# Created at 2025-02-13T09:37:04.209
+Unexpected IOException with stream:   And User enters last name: "Doe"                             # com.stepdefinitions.testform.TestForm.userEntersLastName(java.lang.String)
+
+
+# Created at 2025-02-13T09:37:04.375
+Unexpected IOException with stream:   And User enters email: "john.doe@example.com"                # com.stepdefinitions.testform.TestForm.userEntersEmail(java.lang.String)
+
+
+# Created at 2025-02-13T09:37:04.478
+Unexpected IOException with stream:   And User selects gender: "Male"                              # com.stepdefinitions.testform.TestForm.userSelectsGender(java.lang.String)
+
+
+# Created at 2025-02-13T09:37:04.682
+Unexpected IOException with stream:   And User enters mobile num: "82221234"                       # com.stepdefinitions.testform.TestForm.userEntersMobileNum(java.lang.String)
+
+
+# Created at 2025-02-13T09:37:05.003
+Unexpected IOException with stream:   And User selects hobbies : "Sports,Music,Reading"            # com.stepdefinitions.testform.TestForm.userSelectsHobbies(java.lang.String)
+
+
+# Created at 2025-02-13T09:37:05.069
+Unexpected IOException with stream:   And User uploads file: "download.png"                        # com.stepdefinitions.testform.TestForm.userUploadFile(java.lang.String)
+
+
+# Created at 2025-02-13T09:37:05.404
+Unexpected IOException with stream:   And User selects location: "North"                           # com.stepdefinitions.testform.TestForm.userSelectLocation(java.lang.String)
+
+
+# Created at 2025-02-13T09:37:05.635
+Unexpected IOException with stream:   And User enters address: "Jalan 123, 970111, state, Country" # com.stepdefinitions.testform.TestForm.userEntersAddress(java.lang.String)
+
+
+# Created at 2025-02-13T09:37:05.640
+Unexpected IOException with stream: Driver quit successfully.
+
+
+# Created at 2025-02-13T09:37:05.658
+Unexpected IOException with stream: ┌───────────────────────────────────────────────────────────────────────────────────┐
+│ Share your Cucumber Report with your team at https://reports.cucumber.io          │
+│ Activate publishing with one of the following:                                    │
+│                                                                                   │
+│ src/test/resources/cucumber.properties:          cucumber.publish.enabled=true    │
+│ src/test/resources/junit-platform.properties:    cucumber.publish.enabled=true    │
+│ Environment variable:                            CUCUMBER_PUBLISH_ENABLED=true    │
+│ JUnit:                                           @CucumberOptions(publish = true) │
+│                                                                                   │
+│ More information at https://cucumber.io/docs/cucumber/environment-variables/      │
+│                                                                                   │
+│ Disable this message with one of the following:                                   │
+│                                                                                   │
+│ src/test/resources/cucumber.properties:          cucumber.publish.quiet=true      │
+│ src/test/resources/junit-platform.properties:    cucumber.publish.quiet=true      │
+└───────────────────────────────────────────────────────────────────────────────────┘
+
+
+# Created at 2025-02-13T09:37:05.697
+Unexpected IOException: 2,1,org.apache.maven.surefire.testng.TestNGDirectoryTestSuite,com.stepdefinitions.TestRunner,null,null,null
+
+

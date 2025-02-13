@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extent>
+    <reportName>Cucumber Test Report</reportName>
+    <theme>STANDARD</theme>  <!-- Can be STANDARD or DARK -->
+    <documentTitle>Cucumber Test Execution Report</documentTitle>
+    <encoding>UTF-8</encoding>
+    <view>DEFAULT</view> <!-- Can be DEFAULT or DETAILED -->
+</extent>

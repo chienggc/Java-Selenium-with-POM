@@ -1,0 +1,85 @@
+# Created at 2025-02-13T14:30:04.311
+TestSet has not finished before stream error has appeared >> initializing exit by non-null configuration: DEFAULT
+java.io.EOFException
+	at java.base/java.io.DataInputStream.readFully(DataInputStream.java:210)
+	at java.base/java.io.DataInputStream.readInt(DataInputStream.java:385)
+	at org.apache.maven.surefire.booter.MasterProcessCommand.decode(MasterProcessCommand.java:115)
+	at org.apache.maven.surefire.booter.CommandReader$CommandRunnable.run(CommandReader.java:391)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+
+
+# Created at 2025-02-13T14:30:08.468
+Unexpected IOException with stream: Text is now visible: 1.First Name
+
+
+# Created at 2025-02-13T14:30:08.470
+Unexpected IOException with stream:   Given User navigates to test form page                       # com.stepdefinitions.testform.TestForm.navigateTestPage()
+
+
+# Created at 2025-02-13T14:30:08.678
+Unexpected IOException with stream:   When User enters first name: "John"                          # com.stepdefinitions.testform.TestForm.userEntersFirstName(java.lang.String)
+
+
+# Created at 2025-02-13T14:30:08.886
+Unexpected IOException with stream:   And User enters last name: "Doe"                             # com.stepdefinitions.testform.TestForm.userEntersLastName(java.lang.String)
+
+
+# Created at 2025-02-13T14:30:09.136
+Unexpected IOException with stream:   And User enters email: "john.doe@example.com"                # com.stepdefinitions.testform.TestForm.userEntersEmail(java.lang.String)
+
+
+# Created at 2025-02-13T14:30:09.293
+Unexpected IOException with stream:   And User selects gender: "Male"                              # com.stepdefinitions.testform.TestForm.userSelectsGender(java.lang.String)
+
+
+# Created at 2025-02-13T14:30:09.532
+Unexpected IOException with stream:   And User enters mobile num: "82221234"                       # com.stepdefinitions.testform.TestForm.userEntersMobileNum(java.lang.String)
+
+
+# Created at 2025-02-13T14:30:10.678
+Unexpected IOException with stream:   And User selects date of birth: "12/10/1995"                 # com.stepdefinitions.testform.TestForm.userSelectDate(java.lang.String)
+
+
+# Created at 2025-02-13T14:30:11.147
+Unexpected IOException with stream:   And User selects hobbies : "Sports,Music,Reading"            # com.stepdefinitions.testform.TestForm.userSelectsHobbies(java.lang.String)
+
+
+# Created at 2025-02-13T14:30:11.218
+Unexpected IOException with stream:   And User uploads file: "download.png"                        # com.stepdefinitions.testform.TestForm.userUploadFile(java.lang.String)
+
+
+# Created at 2025-02-13T14:30:11.563
+Unexpected IOException with stream:   And User selects location: "North"                           # com.stepdefinitions.testform.TestForm.userSelectLocation(java.lang.String)
+
+
+# Created at 2025-02-13T14:30:11.827
+Unexpected IOException with stream:   And User enters address: "Jalan 123, 970111, state, Country" # com.stepdefinitions.testform.TestForm.userEntersAddress(java.lang.String)
+
+
+# Created at 2025-02-13T14:30:11.828
+Unexpected IOException with stream: Driver quit successfully.
+
+
+# Created at 2025-02-13T14:30:11.850
+Unexpected IOException with stream: ┌───────────────────────────────────────────────────────────────────────────────────┐
+│ Share your Cucumber Report with your team at https://reports.cucumber.io          │
+│ Activate publishing with one of the following:                                    │
+│                                                                                   │
+│ src/test/resources/cucumber.properties:          cucumber.publish.enabled=true    │
+│ src/test/resources/junit-platform.properties:    cucumber.publish.enabled=true    │
+│ Environment variable:                            CUCUMBER_PUBLISH_ENABLED=true    │
+│ JUnit:                                           @CucumberOptions(publish = true) │
+│                                                                                   │
+│ More information at https://cucumber.io/docs/cucumber/environment-variables/      │
+│                                                                                   │
+│ Disable this message with one of the following:                                   │
+│                                                                                   │
+│ src/test/resources/cucumber.properties:          cucumber.publish.quiet=true      │
+│ src/test/resources/junit-platform.properties:    cucumber.publish.quiet=true      │
+└───────────────────────────────────────────────────────────────────────────────────┘
+
+
+# Created at 2025-02-13T14:30:11.911
+Unexpected IOException: 2,1,org.apache.maven.surefire.testng.TestNGDirectoryTestSuite,com.stepdefinitions.TestRunner,null,null,null
+
+
