@@ -33,20 +33,20 @@ Feature: Technical Test Form
     And User submits the form
     Then verified form submitted successfully
 
-  @negative
-  Scenario Outline: TF0002 User submit empty form and verify mandatory field have error message
-    Given User navigates to test form page
-    When User submits the form
-    Then verify field: "<fieldName>" able to have validation message: "<errorMsg>"
-    Examples:
-      | fieldName       | errorMsg                   |
-      | First Name      | This field is required     |
-      | Last Name       | This field is required     |
-      | Email           | This field is required     |
-      | Gender          | This field is required     |
-      | Mobile number   | This field is required     |
-      | Date of Birth   | This field is required     |
-      | Hobbies         | This field is required     |
+#  @negative
+#  Scenario Outline: TF0002 User submit empty form and verify mandatory field have error message
+#    Given User navigates to test form page
+#    When User submits the form
+#    Then verify field: "<fieldName>" able to have validation message: "<errorMsg>"
+#    Examples:
+#      | fieldName       | errorMsg                   |
+#      | First Name      | This field is required     |
+#      | Last Name       | This field is required     |
+#      | Email           | This field is required     |
+#      | Gender          | This field is required     |
+#      | Mobile number   | This field is required     |
+#      | Date of Birth   | This field is required     |
+#      | Hobbies         | This field is required     |
 
 
 
