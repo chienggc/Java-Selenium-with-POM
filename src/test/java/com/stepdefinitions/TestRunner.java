@@ -14,6 +14,7 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
                 "pretty",  // Print Cucumber logs in the console
                 "html:target/cucumber-reports.html",  // Default HTML report
                 "json:target/cucumber.json",  // JSON report for use with other reporting tools
+                "rerun:target/failed_scenarios.txt",
         },
         tags = "",
         monochrome = true,  // Clean output in the console

@@ -67,8 +67,8 @@ public class TestFormPage extends CommonElement{
          enterTextForDynamicLabel("Address",address, "textarea");
     }
 
-    public void itemChecked(){
-        isItemSelected();
+    public void itemChecked(String label, String cond){
+        isItemSelected(label, cond);
     }
 
 }

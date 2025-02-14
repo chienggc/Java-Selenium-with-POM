@@ -30,7 +30,7 @@ Feature: Technical Test Form
     Then verified form submitted successfully
 
   @negative
-  Scenario Outline: TF0002 User submit empty form and verify mandatory field have error message
+  Scenario Outline: TF0003 User submit empty form and verify mandatory field have error message
     Given User navigates to test form page
     When User submits the form
     Then verified field: "<fieldName>" "<haveOrNo>" validation message: "<errorMsg>"
@@ -44,25 +44,25 @@ Feature: Technical Test Form
       | Date of Birth   | have     | This field is required     |
       | Hobbies         | have     | This field is required     |
 
-  @negative @positive
-  Scenario Outline: TF0005 Ensure Mobile number field validation is working
+  @mix
+  Scenario Outline: TF0004 Ensure Mobile number field validation is working
     Given User navigates to test form page
     When User enters mobile num: "<mobileNum>"
-    Then verified field: "Mobile number" "<haveOrNo>" validation message: "Please enter a valid mobile number"
+    Then verified field: "Mobile number" "<haveOrNo>" validation message: "<vMessage>"
     Examples:
-      | mobileNum   | haveOrNo |
-      | 22111234    | have     |
-      | 00000000    | have     |
-      | !@#$%^&*    | have     |
-      | 821112349   | have     |
-      | 8211123     | have     |
-      | 88AA99BB    | have     |
-      | ABCDEFGH    | have     |
-      | 82111234    | have no  |
-      | 92111234    | have no  |
+      | mobileNum   | haveOrNo | vMessage |
+      | 22111234    | have     | Please enter a valid mobile number |
+      | 00000000    | have     | This field is required             |
+      | !@#$%^&*    | have     | This field is required             |
+      | 821112349   | have     | Please enter a valid mobile number |
+      | 8211123     | have     | Please enter a valid mobile number |
+      | 88AA99BB    | have     | Please enter a valid mobile number |
+      | ABCDEFGH    | have     | This field is required             |
+      | 82111234    | have no  | Please enter a valid mobile number |
+      | 92111234    | have no  | Please enter a valid mobile number |
 
 
-  @negative @positive
+  @mix
   Scenario Outline: TF0005 Ensure email validation is working
     Given User navigates to test form page
     When User enters email: "<email>"
@@ -79,7 +79,8 @@ Feature: Technical Test Form
       | 1@#@!#@!@gmail.com      | have     |
       | 12321321@ .com          | have     |
 
-  Scenario Outline: Ensure check box check and uncheck is working
+  @mix
+  Scenario Outline: TF0006 Ensure check box check and uncheck is working
     Given User navigates to test form page
     When User selects hobbies : "<field>"
     Then verified "<field>" is "selected"
@@ -91,8 +92,8 @@ Feature: Technical Test Form
       | Music     |
       | Reading   |
 
-
-  Scenario Outline: Ensure radio button selection is working
+  @mix
+  Scenario Outline: TF0007 Ensure radio button selection is working
     Given User navigates to test form page
     Then verified "Male" is "not selected"
     And verified "Female" is "not selected"
@@ -106,7 +107,4 @@ Feature: Technical Test Form
       | firstGenderSelection | secondGenderSelection  |
       | Male                 | Female                 |
       | Female               | Male                   |
-
-
-
 
