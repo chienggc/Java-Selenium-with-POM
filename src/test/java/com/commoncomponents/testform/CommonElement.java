@@ -12,7 +12,7 @@ import java.time.Duration;
 import org.openqa.selenium.NoSuchElementException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.Duration;
+//import java.time.Duration;
 import java.util.List;
 import java.util.Random;
 public class CommonElement {
@@ -48,8 +48,6 @@ public class CommonElement {
         int monthIndex = Integer.parseInt(monthNumber);
         return fullName ? monthsFull[monthIndex] : monthsAbbr[monthIndex];
     }
-
-
 
     public void clickByXpath(String xpath) {
          // Updated
@@ -101,7 +99,7 @@ public class CommonElement {
     public String get_field_text(String label, String field){
         String labelXpath = "//*[text()='" + label + "']";
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(labelXpath)));
-        String input_xpath = "";
+        String input_xpath ;
         if (field.equals("textfield")){
             input_xpath = labelXpath + "/following::input[1]";
         }else{
@@ -170,9 +168,6 @@ public class CommonElement {
             wait.until(ExpectedConditions.elementToBeClickable(inputField));
             inputField.click();
         }
-
-
-
 
     }
 
@@ -261,6 +256,5 @@ public class CommonElement {
         monthOptionElement.click();
         WebElement date = fluentWait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(dateXpath, abbrMonth, day, year))));
         date.click();
-        // select date //*[contains(@aria-label, 'Oct 05 2025')]
     }
 }

@@ -1,7 +1,7 @@
 Feature: Technical Test Form
 
   @positive
-  Scenario: TF0001 User able to submit form after filled up form details
+  Scenario: TF0001 User able to submit form after filled up ALL field
     Given User navigates to test form page
     When User enters first name: "John"
     And User enters last name: "Doe"
@@ -30,7 +30,7 @@ Feature: Technical Test Form
     Then verified form submitted successfully
 
   @negative
-  Scenario Outline: TF0003 User submit empty form and verify mandatory field have error message
+  Scenario Outline: TF0003 User submits empty form and verify mandatory field have error message
     Given User navigates to test form page
     When User submits the form
     Then verified field: "<fieldName>" "<haveOrNo>" validation message: "<errorMsg>"
@@ -44,7 +44,7 @@ Feature: Technical Test Form
       | Date of Birth   | have     | This field is required     |
       | Hobbies         | have     | This field is required     |
 
-  @mix
+  @fieldValidation
   Scenario Outline: TF0004 Ensure Mobile number field validation is working
     Given User navigates to test form page
     When User enters mobile num: "<mobileNum>"
@@ -52,7 +52,7 @@ Feature: Technical Test Form
     Examples:
       | mobileNum   | haveOrNo | vMessage |
       | 22111234    | have     | Please enter a valid mobile number |
-      | 00000000    | have     | This field is required             |
+      | 00000000    | have     | Please enter a valid mobile number             |
       | !@#$%^&*    | have     | This field is required             |
       | 821112349   | have     | Please enter a valid mobile number |
       | 8211123     | have     | Please enter a valid mobile number |
@@ -61,13 +61,11 @@ Feature: Technical Test Form
       | 82111234    | have no  | Please enter a valid mobile number |
       | 92111234    | have no  | Please enter a valid mobile number |
 
-
-  @mix
+  @fieldValidation
   Scenario Outline: TF0005 Ensure email validation is working
     Given User navigates to test form page
     When User enters email: "<email>"
     Then verified field: "Email" "<haveOrNo>" validation message: "Please enter a valid email"
-    #!
     Examples:
       | email                   | haveOrNo |
       | chienggc9387@gmail.com  | have no  |
@@ -79,7 +77,7 @@ Feature: Technical Test Form
       | 1@#@!#@!@gmail.com      | have     |
       | 12321321@ .com          | have     |
 
-  @mix
+  @fieldValidation
   Scenario Outline: TF0006 Ensure check box check and uncheck is working
     Given User navigates to test form page
     When User selects hobbies : "<field>"
@@ -92,7 +90,7 @@ Feature: Technical Test Form
       | Music     |
       | Reading   |
 
-  @mix
+  @fieldValidation
   Scenario Outline: TF0007 Ensure radio button selection is working
     Given User navigates to test form page
     Then verified "Male" is "not selected"
@@ -108,3 +106,27 @@ Feature: Technical Test Form
       | Male                 | Female                 |
       | Female               | Male                   |
 
+  @fieldValidation
+  Scenario Outline: TF0008 Ensure input is stored in text field correctly
+    Given User navigates to test form page
+    When User enters first name: "<value>"
+    Then verified "<fieldName>" text field contains: "<value>"
+    Examples:
+      | fieldName     | value                          |
+      | First Name    | John                           |
+      | Last Name     | Doe                            |
+      | Email         | john.doe@example.com           |
+      | Mobile number | 82221234                       |
+
+  @fieldValidation
+  Scenario: TF0009 Ensure input is stored in text area field correctly
+    Given User navigates to test form page
+    When User enters address: "Jalan 123, 970111, state, Country"
+    Then verified "Address" text area contains: "Jalan 123, 970111, state, Country"
+
+
+  @failed
+  Scenario: TF0010 Demo failed test cases
+    Given User navigates to test form page
+    When User enters address: "Jalan 123, 970111, state, Country"
+    Then verified "Address" text area contains: "1234"
