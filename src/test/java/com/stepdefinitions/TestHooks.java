@@ -13,6 +13,7 @@ public class TestHooks {
     public void setUp() {
         driver = BrowserSetup.getDriver();
         System.out.println("Driver initialized: " + driver);
+        System.out.println("Running with tag: " + System.getProperty("cucumber.options"));
     }
 
     @After

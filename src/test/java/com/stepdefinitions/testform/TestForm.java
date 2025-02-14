@@ -100,8 +100,10 @@ public class TestForm {
         testFormPage.verifySuccessMessage();
     }
 
-    @Then("verify field: {string} able to have validation message: {string}")
-    public void verifyFieldWithErrorMessage(String field, String text) {
-        testFormPage.verifyFieldErrorMessage(field, text);
+    @Then("verified field: {string} {string} validation message: {string}")
+    public void verifyFieldWithErrorMessage(String field,String cond, String text) {
+        testFormPage.verifyFieldErrorMessage(field, cond, text);
     }
+
+
 }

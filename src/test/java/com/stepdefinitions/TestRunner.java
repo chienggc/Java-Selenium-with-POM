@@ -8,12 +8,13 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = "src/test/resources/features",  // Path to feature files
         glue = {"com.stepdefinitions"},  // Packages containing step definitions and listeners
-        tags = "",  // Default tag for testing, can be overridden from command line
+//        tags = "",  // Default tag for testing, can be overridden from command line
         plugin = {
                 "pretty",  // Print Cucumber logs in the console
                 "html:target/cucumber-reports.html",  // Default HTML report
                 "json:target/cucumber.json",  // JSON report for use with other reporting tools
         },
+        tags = "",
         monochrome = true,  // Clean output in the console
         dryRun = false,  // Set to true to check for missing steps without running tests
         snippets = CucumberOptions.SnippetType.CAMELCASE  // Ensures step definitions are in CamelCase format

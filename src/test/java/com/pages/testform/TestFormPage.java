@@ -58,43 +58,13 @@ public class TestFormPage extends CommonElement{
         checkTextVisible("Thank you for filling out the form.", "h2");
 
     }
-    public void verifyFieldErrorMessage(String fieldName, String errorMsg){
-        validateFieldIsRequired(fieldName, errorMsg);
+    public void verifyFieldErrorMessage(String fieldName, String cond, String errorMsg){
+        validateFieldIsRequired(fieldName, cond, errorMsg);
     }
-    //
-//    // Set Date of Birth (Assuming format dd/mm/yyyy)
-//    public void enterDateOfBirth(String dob) {
-//        driver.findElement(dateOfBirthField).sendKeys(dob);
-//    }
-//
-//    // Select Hobbies
-//    public void selectHobbies(boolean sport, boolean music) {
-//        if (sport) {
-//            driver.findElement(hobby1Checkbox).click();
-//        }
-//        if (music) {
-//            driver.findElement(hobby2Checkbox).click();
-//        }
-//    }
-//
-//    // Upload Attachment (File upload)
-//    public void uploadAttachment(String filePath) {
-//        driver.findElement(attachmentField).sendKeys(filePath);
-//    }
-//
-//    // Select Location from Dropdown
-//    public void selectLocation(String location) {
-//        Select locationSelect = new Select(driver.findElement(locationDropdown));
-//        locationSelect.selectByVisibleText(location);
-//    }
-//
+
     public void enterAddress(String address) {
          enterTextForDynamicLabel("Address",address, "textarea");
     }
-//
-//    // Method to submit the form (if applicable)
-//    public void submitForm() {
-//        WebElement submitButton = driver.findElement(By.id("submit"));
-//        submitButton.click();
-//    }
+
+
 }
