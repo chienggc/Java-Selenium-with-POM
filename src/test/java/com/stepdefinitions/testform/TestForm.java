@@ -105,5 +105,10 @@ public class TestForm {
         testFormPage.verifyFieldErrorMessage(field, cond, text);
     }
 
+    @Then("verified {string} is {string}")
+    public void testCheck(String label, String cond) {
+        testFormPage.itemChecked(label, cond);
+    }
+
 
 }

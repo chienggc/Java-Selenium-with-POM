@@ -206,14 +206,23 @@ public class CommonElement {
 
     }
 
-    public void isItemSelected(){
-        WebElement element = driver.findElement(By.xpath("//*[contains(text(), 'Sport')]/preceding::span[1]"));
+    public void isItemSelected(String label, String cond){
+        String xpath = String.format("//*[contains(text(), '%s')]/preceding::span[1]", label);
+        WebElement element = driver.findElement(By.xpath(xpath));
         String idValue = element.getAttribute("data-checked");
+        boolean itemFlag;
         if (idValue != null) {
-            System.out.println("Item is selected");
+            itemFlag = true;
         } else {
             System.out.println("Item is not selected");
+            itemFlag = false;
         }
+        if ("selected".equals(cond)) {
+            assert itemFlag : "Item is not selected, but expected to be.";
+        }else {
+            assert !itemFlag : "Item is selected, but expected to be not selected.";
+        }
+
     }
 
     public boolean isElementNotVisible(String xpath) {

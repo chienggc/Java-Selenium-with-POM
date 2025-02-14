@@ -62,7 +62,7 @@ Feature: Technical Test Form
       | 92111234    | have no  |
 
 
-  @negative
+  @negative @positive
   Scenario Outline: TF0005 Ensure email validation is working
     Given User navigates to test form page
     When User enters email: "<email>"
@@ -78,5 +78,35 @@ Feature: Technical Test Form
       | 123123gmail.com         | have     |
       | 1@#@!#@!@gmail.com      | have     |
       | 12321321@ .com          | have     |
+
+  Scenario Outline: Ensure check box check and uncheck is working
+    Given User navigates to test form page
+    When User selects hobbies : "<field>"
+    Then verified "<field>" is "selected"
+    When User selects hobbies : "<field>"
+    Then verified "<field>" is "not selected"
+    Examples:
+      | field     |
+      | Sports    |
+      | Music     |
+      | Reading   |
+
+
+  Scenario Outline: Ensure radio button selection is working
+    Given User navigates to test form page
+    Then verified "Male" is "not selected"
+    And verified "Female" is "not selected"
+    When User selects gender: "<firstGenderSelection>"
+    Then verified "<firstGenderSelection>" is "selected"
+    And verified "<secondGenderSelection>" is "not selected"
+    When User selects gender: "<secondGenderSelection>"
+    Then verified "<secondGenderSelection>" is "selected"
+    And verified "<firstGenderSelection>" is "not selected"
+    Examples:
+      | firstGenderSelection | secondGenderSelection  |
+      | Male                 | Female                 |
+      | Female               | Male                   |
+
+
 
 
