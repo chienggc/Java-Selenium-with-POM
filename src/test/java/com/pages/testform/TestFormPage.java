@@ -41,6 +41,7 @@ public class TestFormPage extends CommonElement{
     public void selectHobbies(String hobbies) {
         selectCheckBox("Hobbies",hobbies);
     }
+
     public void selectLocation(String loc){
         enterTextForDynamicLabel("Location",loc, "textfield");
         clickOnDropDown(loc);
@@ -66,5 +67,8 @@ public class TestFormPage extends CommonElement{
          enterTextForDynamicLabel("Address",address, "textarea");
     }
 
+    public void itemChecked(){
+        isItemSelected();
+    }
 
 }

@@ -44,22 +44,39 @@ Feature: Technical Test Form
       | Date of Birth   | have     | This field is required     |
       | Hobbies         | have     | This field is required     |
 
-  @negative
+  @negative @positive
   Scenario Outline: TF0005 Ensure Mobile number field validation is working
     Given User navigates to test form page
     When User enters mobile num: "<mobileNum>"
     Then verified field: "Mobile number" "<haveOrNo>" validation message: "Please enter a valid mobile number"
-    #!
     Examples:
       | mobileNum   | haveOrNo |
-      | 22111234    | have     | # invalid ,not start with 8 or 9
-      | 00000000    | have     | # invalid ,not start with 8 or 9
-      | !@#$%^&*    | have     | # Special characters should not be valid
-      | 821112349   | have     | # Length of the number should be 8 digits
-      | 8211123     | have     | # Missing one digit, should fail
-      | 88AA99BB    | have     | # Alphanumeric, should fail
-      | ABCDEFGH    | have     | # Letters, should fail
-      | 82111234    | have no  | # valid
-      | 92111234    | have no  | # valid
+      | 22111234    | have     |
+      | 00000000    | have     |
+      | !@#$%^&*    | have     |
+      | 821112349   | have     |
+      | 8211123     | have     |
+      | 88AA99BB    | have     |
+      | ABCDEFGH    | have     |
+      | 82111234    | have no  |
+      | 92111234    | have no  |
+
+
+  @negative
+  Scenario Outline: TF0005 Ensure email validation is working
+    Given User navigates to test form page
+    When User enters email: "<email>"
+    Then verified field: "Email" "<haveOrNo>" validation message: "Please enter a valid email"
+    #!
+    Examples:
+      | email                   | haveOrNo |
+      | chienggc9387@gmail.com  | have no  |
+      | chienggc9387@icloud.com | have no  |
+      | tester@tech.gov.sg      | have no  |
+      | 12344123                | have     |
+      | 12344123@123123123      | have     |
+      | 123123gmail.com         | have     |
+      | 1@#@!#@!@gmail.com      | have     |
+      | 12321321@ .com          | have     |
 
 

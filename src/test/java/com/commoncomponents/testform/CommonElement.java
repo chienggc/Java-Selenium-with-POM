@@ -148,6 +148,9 @@ public class CommonElement {
         wait.until(ExpectedConditions.elementToBeClickable(inputField));
         inputField.clear();
         inputField.sendKeys(textToEnter);
+        WebElement inputLabel = driver.findElement(By.xpath(labelXpath));
+        inputLabel.click();
+
     }
 
     public void selectCheckBox(String labelText, String checkBoxItems) {
@@ -191,9 +194,42 @@ public class CommonElement {
         fileInput.sendKeys(filePath.toString());
 
     }
-    public void validateFieldIsRequired(String fieldName, String errorMsg){
-        String validationText = get_xpath_text(String.format(validationXpath, fieldName));
-        assert validationText.contains(errorMsg) : "Assertion failed: validation message not tally";
+    public void validateFieldIsRequired(String fieldName,String cond, String errorMsg){
+        String errorXpath = String.format(validationXpath, fieldName);
+        if (cond.equals("have")){
+            String validationText = get_xpath_text(errorXpath);
+            assert validationText.contains(errorMsg) : "Assertion failed: validation message not tally";
+        }else{
+            boolean hasErrorMsg = isElementNotVisible(errorXpath);
+            assert hasErrorMsg : "Assertion failed: The text is visible!!!";
+        }
+
+    }
+
+    public void isItemSelected(){
+        WebElement element = driver.findElement(By.xpath("//*[contains(text(), 'Sport')]/preceding::span[1]"));
+        String idValue = element.getAttribute("data-checked");
+        if (idValue != null) {
+            System.out.println("Item is selected");
+        } else {
+            System.out.println("Item is not selected");
+        }
+    }
+
+    public boolean isElementNotVisible(String xpath) {
+        try {
+            WebElement element = driver.findElement(By.xpath(xpath));
+            boolean isVisible = element.isDisplayed();
+            if (isVisible) {
+                System.out.println("Element is visible.");
+            } else {
+                System.out.println("Element is not visible.");
+            }
+            return !isVisible;
+        } catch (NoSuchElementException e) {
+            System.out.println("Element does not exist.");
+            return true; // Element is not visible because it does not exist
+        }
     }
 
     public void selectDate(String dateLabel, String items) {

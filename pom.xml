@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.automation</groupId>
-    <artifactId>Work-Holiday-Pass</artifactId>
+    <artifactId>Java-Selenium-POM</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
@@ -179,7 +179,7 @@
                     <systemProperties>
                         <property>
 <!--                            <name>cucumber.options</name>-->
-<!--                            <value>&#45;&#45;tags @smoke</value> &lt;!&ndash; Filter tests with the @smoke tag &ndash;&gt;-->
+<!--                            <value>${cucumber.options}</value> &lt;!&ndash; Referencing system property &ndash;&gt;-->
                         </property>
                     </systemProperties>
                     <testFailureIgnore>true</testFailureIgnore>

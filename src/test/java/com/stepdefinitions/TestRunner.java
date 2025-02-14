@@ -3,6 +3,7 @@ package com.stepdefinitions;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
+import io.cucumber.testng.AbstractTestNGCucumberTests;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
@@ -19,5 +20,5 @@ import org.junit.runner.RunWith;
         dryRun = false,  // Set to true to check for missing steps without running tests
         snippets = CucumberOptions.SnippetType.CAMELCASE  // Ensures step definitions are in CamelCase format
 )
-public class TestRunner {
+public class TestRunner extends AbstractTestNGCucumberTests {
 }
