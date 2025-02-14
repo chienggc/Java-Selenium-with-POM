@@ -198,7 +198,7 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <projectName>Work-Holiday-Pass</projectName>
+                            <projectName>Java-Selenium-with-POM</projectName>
                             <outputDirectory>${project.build.directory}/cucumber-report-html</outputDirectory>
                             <cucumberOutput>${project.build.directory}/cucumber.json</cucumberOutput>
 <!--                            <jsonFiles>-->
