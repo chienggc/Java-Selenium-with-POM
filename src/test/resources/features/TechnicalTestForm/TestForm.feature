@@ -49,6 +49,7 @@ Feature: Technical Test Form
     Given User navigates to test form page
     When User enters mobile num: "<mobileNum>"
     Then verified field: "Mobile number" "<haveOrNo>" validation message: "Please enter a valid mobile number"
+    #!
     Examples:
       | mobileNum   | haveOrNo |
       | 22111234    | have     | # invalid ,not start with 8 or 9
