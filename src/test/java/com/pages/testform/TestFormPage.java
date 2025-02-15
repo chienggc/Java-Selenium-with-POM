@@ -78,6 +78,10 @@ public class TestFormPage extends CommonElement {
         checkTextVisible("Thank you for filling out the form.", "h2");
     }
 
+    public void clickToExpandCalendar(String label) {
+        clickCalendar(label);
+    }
+
     public void verifyFieldErrorMessage(String fieldName, String cond, String errorMsg) {
         validateFieldIsRequired(fieldName, cond, errorMsg);
     }

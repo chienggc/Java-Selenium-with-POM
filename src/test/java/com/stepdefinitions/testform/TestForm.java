@@ -1,14 +1,18 @@
 package com.stepdefinitions.testform;
-import com.stepdefinitions.TestHooks;
+import com.hooks.TestHooks;
 import com.utils.BrowserSetup;
 import com.utils.Config;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import com.pages.testform.TestFormPage;
+import java.util.List;
+import java.util.Map;
+import io.cucumber.datatable.DataTable;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
 
 public class TestForm {
 
@@ -19,12 +23,52 @@ public class TestForm {
     public TestForm() {
     }
 
-    public WebDriver return_driver() {
-        return this.driver;
+    @When("User enters the following details:")
+    public void userEntersDetails(DataTable dataTable) {
+        // Convert the DataTable into a List of Maps, where each map represents a row
+        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+
+        // Loop through each row of data and fill the form accordingly
+        for (Map<String, String> row : data) {
+            String fieldName = row.get("Field");
+            String value = row.get("Value");
+
+            switch (fieldName) {
+                case "First Name":
+                    testFormPage.enterFirstName(value);
+                    break;
+                case "Last Name":
+                    testFormPage.enterLastName(value);
+                    break;
+                case "Email":
+                    testFormPage.enterEmail(value);
+                    break;
+                case "Gender":
+                    testFormPage.selectGender(value);
+                    break;
+                case "Mobile number":
+                    testFormPage.enterMobileNumber(value);
+                    break;
+                case "Date of Birth":
+                    testFormPage.selectDateOfBirth(value);
+                    break;
+                case "Hobbies":
+                    testFormPage.selectHobbies(value);
+                    break;
+                case "File":
+                    testFormPage.upload_files(value);
+                    break;
+                case "Location":
+                    testFormPage.selectLocation(value);
+                    break;
+                case "Address":
+                    testFormPage.enterAddress(value);
+                    break;
+                default:
+                    System.out.println("Unknown field: " + fieldName);
+            }
+        }
     }
-
-
-
     @Given("User navigates to test form page")
     public void navigateTestPage() {
         System.out.println("Before getting driver: " + TestHooks.getDriver());
@@ -76,7 +120,7 @@ public class TestForm {
 
     @When("User uploads file: {string}")
     public void userUploadFile(String file) {
-        testFormPage.upload_files(file);
+        testFormPage.userUpload(file);
     }
 
     @When("User selects location: {string}")
@@ -106,9 +150,52 @@ public class TestForm {
     }
 
     @Then("verified {string} is {string}")
-    public void testCheck(String label, String cond) {
+    public void verifyItemChecked(String label, String cond) {
         testFormPage.itemChecked(label, cond);
     }
 
+    @Then("verified {string} text field contains: {string}")
+    public void verifyTextFieldInputed(String label, String input) {
+        String text = testFormPage.getInputedText(label, "textfield");
+        assert text.contains(input) : "Assertion failed: User input not tally with field Value";
+
+    }
+
+    @Then("verified {string} text area contains: {string}")
+    public void verifyTextAreaInputed(String label, String input) {
+        String text = testFormPage.getInputedText(label, "textarea");
+        assert text.contains(input) : "Assertion failed: User input not tally with field Value";
+
+    }
+
+    @When("User clicks on calendar button to expand calendar")
+    public void clickOnCalendar(){
+        testFormPage.clickToExpandCalendar("Date of Birth");
+    }
+
+    @Then("Verified today's date is selected from calendar")
+    public void verifyTodayDate(){
+        testFormPage.clickToExpandCalendar("Date of Birth");
+        String today = testFormPage.getTodaysDate();
+        String selectedDate = testFormPage.getCalSelectedValue();
+        boolean result = testFormPage.compareDate(selectedDate, today, "EEE MMM dd yyyy", "dd/MM/yyyy");
+        assert result : "Circled date is not the same as today's date";
+        System.out.println("Testttttttttttttttttttttt");
+        System.out.println(result);
+    }
+
+    @When("User select today's date")
+    public void selectTodayDate(){
+        String today = testFormPage.getTodaysDate();
+        testFormPage.selectDateOfBirth(today);
+    }
+
+    @Then("Verified today's date is circled from calendar")
+    public void verifyTodayDateCircled(){
+        String today = testFormPage.getTodaysDate();
+        String circledDay = testFormPage.getXpathAttributeValue("//button[contains(@class, 'css-9h1j97')]", "aria-label");
+        boolean result = testFormPage.compareDate(circledDay, today, "EEE MMM dd yyyy", "dd/MM/yyyy");
+        assert result : "Circled date is not the same as today's date";
+    }
 
 }

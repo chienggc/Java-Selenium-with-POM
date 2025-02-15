@@ -1,4 +1,4 @@
-package com.stepdefinitions;
+package com.runners;
 
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
@@ -10,8 +10,8 @@ import org.junit.runner.RunWith;
         glue = {"com.stepdefinitions"},
         plugin = {
                 "pretty",
-                "html:target/cucumber-report.html",
-                "json:target/cucumber-report.json"
+                "html:target/rerun-cucumber-report.html",
+                "json:target/rerun-cucumber-report.json"
         }
 )
 public class RerunFailedTests {

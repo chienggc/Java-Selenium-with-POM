@@ -1,27 +1,31 @@
 Feature: Technical Test Form
 
+  # input with data table
   @positive
   Scenario: TF0001 User able to submit form after filled up ALL field
     Given User navigates to test form page
-    When User enters first name: "John"
-    And User enters last name: "Doe"
-    And User enters email: "john.doe@example.com"
-    And User selects gender: "Male"
-    And User enters mobile num: "82221234"
-    And User selects date of birth: "12/10/1995"
-    And User selects hobbies : "Sports,Music,Reading"
-    And User uploads file: "download.png"
-    And User selects location: "North"
-    And User enters address: "Jalan 123, 970111, state, Country"
+    When User enters the following details:
+      | Field          | Value                        |
+      | First Name     | choon                        |
+      | Last Name      | guan                         |
+      | Email          | chieng.gc@example.com        |
+      | Gender         | Male                         |
+      | Mobile number  | 82221234                     |
+      | Date of Birth  | 12/10/1995                   |
+      | Hobbies        | Sports,Music,Reading         |
+      | File           | download.png                 |
+      | Location       | North                        |
+      | Address        | Jalan 123, 970111, state, Country |
     And User submits the form
     Then verified form submitted successfully
 
+      # input with keyword
   @positive
   Scenario: TF0002 User is able to submit the form without filling in optional fields
     Given User navigates to test form page
-    When User enters first name: "John"
-    And User enters last name: "Doe"
-    And User enters email: "john.doe@example.com"
+    When User enters first name: "choon"
+    And User enters last name: "guan"
+    And User enters email: "chieng.gc@example.com"
     And User selects gender: "Male"
     And User enters mobile num: "82221234"
     And User selects date of birth: "12/10/1995"
@@ -29,6 +33,7 @@ Feature: Technical Test Form
     And User submits the form
     Then verified form submitted successfully
 
+    # input with Scenario Outline
   @negative
   Scenario Outline: TF0003 User submits empty form and verify mandatory field have error message
     Given User navigates to test form page
@@ -36,13 +41,13 @@ Feature: Technical Test Form
     Then verified field: "<fieldName>" "<haveOrNo>" validation message: "<errorMsg>"
     Examples:
       | fieldName       | haveOrNo | errorMsg               |
-      | First Name      | have     | This field is required     |
-      | Last Name       | have     | This field is required     |
-      | Email           | have     | This field is required     |
-      | Gender          | have     | This field is required     |
-      | Mobile number   | have     | This field is required     |
-      | Date of Birth   | have     | This field is required     |
-      | Hobbies         | have     | This field is required     |
+      | First Name      | have     | This field is required |
+      | Last Name       | have     | This field is required |
+      | Email           | have     | This field is required |
+      | Gender          | have     | This field is required |
+      | Mobile number   | have     | This field is required |
+      | Date of Birth   | have     | This field is required |
+      | Hobbies         | have     | This field is required |
 
   @fieldValidation
   Scenario Outline: TF0004 Ensure Mobile number field validation is working
@@ -52,12 +57,12 @@ Feature: Technical Test Form
     Examples:
       | mobileNum   | haveOrNo | vMessage |
       | 22111234    | have     | Please enter a valid mobile number |
-      | 00000000    | have     | Please enter a valid mobile number             |
-      | !@#$%^&*    | have     | This field is required             |
+      | 00000000    | have     | Please enter a valid mobile number |
+      | !@#$%^&*    | have     | This field is required |
       | 821112349   | have     | Please enter a valid mobile number |
       | 8211123     | have     | Please enter a valid mobile number |
       | 88AA99BB    | have     | Please enter a valid mobile number |
-      | ABCDEFGH    | have     | This field is required             |
+      | ABCDEFGH    | have     | This field is required |
       | 82111234    | have no  | Please enter a valid mobile number |
       | 92111234    | have no  | Please enter a valid mobile number |
 
@@ -107,16 +112,16 @@ Feature: Technical Test Form
       | Female               | Male                   |
 
   @fieldValidation
-  Scenario Outline: TF0008 Ensure input is stored in text field correctly
+  Scenario: TF0008 Ensure input is stored in text field correctly
     Given User navigates to test form page
-    When User enters first name: "<value>"
-    Then verified "<fieldName>" text field contains: "<value>"
-    Examples:
-      | fieldName     | value                          |
-      | First Name    | John                           |
-      | Last Name     | Doe                            |
-      | Email         | john.doe@example.com           |
-      | Mobile number | 82221234                       |
+    When User enters first name: "John"
+    Then verified "First Name" text field contains: "John"
+    When User enters last name: "Doe"
+    Then verified "Last Name" text field contains: "Doe"
+    When User enters email: "john.doe@example.com"
+    Then verified "Email" text field contains: "john.doe@example.com"
+    When User enters mobile num: "82221234"
+    Then verified "Mobile number" text field contains: "8222 1234"
 
   @fieldValidation
   Scenario: TF0009 Ensure input is stored in text area field correctly
@@ -124,9 +129,31 @@ Feature: Technical Test Form
     When User enters address: "Jalan 123, 970111, state, Country"
     Then verified "Address" text area contains: "Jalan 123, 970111, state, Country"
 
-
   @failed
   Scenario: TF0010 Demo failed test cases
     Given User navigates to test form page
     When User enters address: "Jalan 123, 970111, state, Country"
     Then verified "Address" text area contains: "1234"
+
+  @positive
+  Scenario: TF00011 Ensure selected date is reflect correct on date field
+    Given User navigates to test form page
+    When User selects date of birth: "12/10/1995"
+    Then verified "Date of Birth" text field contains: "12/10/1995"
+
+  @positive
+  Scenario: TF00012 Verify by default, today's date will be circled from calendar
+    Given User navigates to test form page
+    When User clicks on calendar button to expand calendar
+    Then Verified today's date is circled from calendar
+
+  @positive
+  Scenario: TF00013 Ensure after date is selected, it will be highlighted
+    Given User navigates to test form page
+    When User select today's date
+    Then Verified today's date is selected from calendar
+
+
+
+  #Date restrictions (e.g., only past dates allowed).
+  #File upload success and type validation (e.g., only PDFs allowed).

@@ -7,7 +7,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
-
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.Duration;
 import org.openqa.selenium.NoSuchElementException;
 import java.nio.file.Path;
@@ -22,6 +23,7 @@ public class CommonElement {
     private static final String folowBtnByText = "//*[text()='%s']/following::button[1]";
     private static final String dateXpath = "//*[contains(@aria-label, '%s %s %s')]";
     private static final String validationXpath = "//*[text()='%s']/following::div[contains(@class, 'error-message')]";
+    private static final String selectedDateXpath = "//*[contains(@aria-pressed, 'true')]";
     private WebDriver driver;
     private static final int DefaultWaitingSecond = 10;
     private WebDriverWait wait;
@@ -105,8 +107,7 @@ public class CommonElement {
         }else{
             input_xpath = labelXpath + "/following::textarea[1]";
         }
-        WebElement inputField = driver.findElement(By.xpath(input_xpath)); // Replace with the appropriate selector
-        return inputField.getAttribute("value");
+        return getXpathAttributeValue(input_xpath,"value");
     }
     public String get_xpath_text(String xpath){
         wait.until(ExpectedConditions.visibilityOfElementLocated(
@@ -203,8 +204,7 @@ public class CommonElement {
 
     public void isItemSelected(String label, String cond){
         String xpath = String.format("//*[contains(text(), '%s')]/preceding::span[1]", label);
-        WebElement element = driver.findElement(By.xpath(xpath));
-        String idValue = element.getAttribute("data-checked");
+        String idValue = getXpathAttributeValue(xpath,"data-checked");
         boolean itemFlag;
         if (idValue != null) {
             itemFlag = true;
@@ -235,6 +235,23 @@ public class CommonElement {
             return true; // Element is not visible because it does not exist
         }
     }
+    public String getCalSelectedValue(){
+        return getXpathAttributeValue(selectedDateXpath,"aria-label");
+    }
+
+    public void clickCalendar(String label){
+        WebElement calendarBtn = fluentWait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(folowBtnByText, label))));
+        calendarBtn.click();
+    }
+    public String getTodaysDate(){
+        LocalDate today = LocalDate.now();
+        // Define the format you want
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy"); // You can change the format here
+        // Format today's date
+        String formattedDate = today.format(formatter);
+        // Print the formatted date
+        return formattedDate;
+    }
 
     public void selectDate(String dateLabel, String items) {
         String[] selections;
@@ -256,5 +273,24 @@ public class CommonElement {
         monthOptionElement.click();
         WebElement date = fluentWait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(dateXpath, abbrMonth, day, year))));
         date.click();
+    }
+
+    public boolean compareDate(String date1, String date2, String formatter1, String formatter2){
+        DateTimeFormatter dateFormatter1 = DateTimeFormatter.ofPattern(formatter1);
+        DateTimeFormatter dateFormatter2 = DateTimeFormatter.ofPattern(formatter2);
+        // Parse both dates
+        LocalDate parsedDate1 = LocalDate.parse(date1, dateFormatter1);
+        LocalDate parsedDate2 = LocalDate.parse(date2, dateFormatter2);
+        // Compare the two dates
+        if (parsedDate1.isEqual(parsedDate2)) {
+            System.out.println("The dates are the same.");
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public String getXpathAttributeValue(String xpath,String attr) {
+        WebElement element = driver.findElement(By.xpath(xpath));
+        return element.getAttribute(attr);
     }
 }
