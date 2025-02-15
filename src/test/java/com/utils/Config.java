@@ -29,7 +29,11 @@ public class Config {
 
     // Get browser configuration
     public static String getBrowser() {
-        return properties.getProperty("browser", "chrome"); // Default to Chrome if not found
+        String browser = System.getProperty("browser");
+        if (browser == null) {
+            browser = properties.getProperty("browser", "chrome");
+        }
+        return browser;
     }
 
     // Get the URL to navigate to
