@@ -17,7 +17,7 @@ public class BrowserSetup {
     // Singleton method to get the WebDriver instance
     public static WebDriver getDriver() {
         if (driver == null) {
-            String browser = Config.getBrowser(); // Get the browser type from config-uat.properties
+            String browser = Config.getBrowser(); // Get the browser type from config-qat.properties
             String headless = System.getProperty("headless", "false");
 
             // Set up the driver for the specified browser

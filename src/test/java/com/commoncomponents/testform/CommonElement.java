@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import java.time.LocalDate;
+import org.junit.Assert;
 import java.time.format.DateTimeFormatter;
 import java.time.Duration;
 import org.openqa.selenium.NoSuchElementException;
@@ -18,12 +19,16 @@ import java.util.List;
 import java.util.Random;
 public class CommonElement {
 
+    private static final String ariaLabelXpath = "//*[contains(@aria-label, '%s')]";
     private static final String monthOrYearbutton = "//*[contains(@aria-label, '%s')]";
     private static final String monthOrYearOption = "//select//option[contains(text(), '%s')]";
     private static final String folowBtnByText = "//*[text()='%s']/following::button[1]";
     private static final String dateXpath = "//*[contains(@aria-label, '%s %s %s')]";
-    private static final String validationXpath = "//*[text()='%s']/following::div[contains(@class, 'error-message')]";
-    private static final String selectedDateXpath = "//*[contains(@aria-pressed, 'true')]";
+    private static final String validation = "//*[text()='%s']/following::div[contains(@class, 'error-message')]";
+    private static final String selectedDate = "//*[contains(@aria-pressed, 'true')]";
+    private static final String allDisabledDay = "//*[contains(@aria-label, '%s')]/following::button" +
+            "[not(@aria-label='Focus on today's date')]";
+    private static final String futureDisabledDay = "//*[contains(@aria-label, \"%s\")]/following::button[not(@aria-label=\"Focus on today's date\")]";
     private WebDriver driver;
     private static final int DefaultWaitingSecond = 10;
     private WebDriverWait wait;
@@ -34,6 +39,7 @@ public class CommonElement {
     private static final String[] monthsFull = {
             "", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
     };
+
     // Constructor
     public CommonElement(WebDriver driver) {
         this.driver = driver;
@@ -52,8 +58,7 @@ public class CommonElement {
     }
 
     public void clickByXpath(String xpath) {
-         // Updated
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+        WebElement element = waitForElementToAppear(String.format(folowBtnByText, xpath));
         element.click();
     }
     public void selectRadioButtonByLabelText(String labelText, String radioText) {
@@ -100,7 +105,7 @@ public class CommonElement {
 
     public String get_field_text(String label, String field){
         String labelXpath = "//*[text()='" + label + "']";
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(labelXpath)));
+        waitForElementToAppear(labelXpath);
         String input_xpath ;
         if (field.equals("textfield")){
             input_xpath = labelXpath + "/following::input[1]";
@@ -110,9 +115,7 @@ public class CommonElement {
         return getXpathAttributeValue(input_xpath,"value");
     }
     public String get_xpath_text(String xpath){
-        wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath(xpath)
-        ));
+        waitForElementToAppear(xpath);
         WebElement element = driver.findElement(By.xpath(xpath)); // Change 'dropdownId' to your actual dropdown's ID
         return element.getText();
     }
@@ -127,24 +130,21 @@ public class CommonElement {
         if(this.driver == null) {
             throw new IllegalStateException("WebDriver is not initialized.");
         }
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//"+tag+"[text()='" + txt + "']")
-        ));
+        WebElement element = waitForElementToAppear("//"+tag+"[text()='" + txt + "']");
         System.out.println("Text is now visible: " + element.getText());
         return element;
     }
 
     public void enterTextForDynamicLabel(String labelText, String textToEnter, String field) {
         String labelXpath = "//*[text()='" + labelText + "']";
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(labelXpath)));
+        waitForElementToAppear(labelXpath);
         String input_xpath;
         if(field.equals("textarea")){
             input_xpath = labelXpath + "/following::textarea[1]";
         }else{
             input_xpath = labelXpath + "/following::input[1]";
         }
-        WebElement inputField = driver.findElement(By.xpath(input_xpath));
-        wait.until(ExpectedConditions.elementToBeClickable(inputField));
+        WebElement inputField = waitForElementToAppear(input_xpath);
         inputField.clear();
         inputField.sendKeys(textToEnter);
         WebElement inputLabel = driver.findElement(By.xpath(labelXpath));
@@ -154,7 +154,7 @@ public class CommonElement {
 
     public void selectCheckBox(String labelText, String checkBoxItems) {
         String labelXpath = "//*[text()='" + labelText + "']";
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(labelXpath)));
+        waitForElementToAppear(labelXpath);
         String[] checkBoxItemsArray;
         if (checkBoxItems.contains(",")) {
             checkBoxItemsArray = checkBoxItems.split(",");
@@ -165,7 +165,7 @@ public class CommonElement {
         for (String checkBoxItem : checkBoxItemsArray) {
             String input_xpath;
             input_xpath = labelXpath + "/following::span[text()='"+checkBoxItem.trim()+"']/ancestor::label[1]";
-            WebElement inputField = driver.findElement(By.xpath(input_xpath));
+            WebElement inputField = waitForElementToAppear(input_xpath);
             wait.until(ExpectedConditions.elementToBeClickable(inputField));
             inputField.click();
         }
@@ -174,14 +174,14 @@ public class CommonElement {
 
     public void clickOnDropDown(String text) {
         String xpath = "//*[contains(text(), '"+ text+"')]";
-        WebElement footerElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
-        wait.until(ExpectedConditions.elementToBeClickable(footerElement));
+        WebElement footerElement = waitForElementToAppear(xpath);
         footerElement.click();
     }
 
     public void click_button_or_hyperlink(String buttonText, String tag) {
-        WebElement element = checkTextVisible(buttonText, tag);
-        element.click();
+        String btnXpath = "//"+tag+"[text()='" + buttonText + "']";
+        WebElement btnElement = waitForElementToAppear(btnXpath);
+        btnElement.click();
     }
 
     public void upload_files(String filenames) {
@@ -191,7 +191,7 @@ public class CommonElement {
 
     }
     public void validateFieldIsRequired(String fieldName,String cond, String errorMsg){
-        String errorXpath = String.format(validationXpath, fieldName);
+        String errorXpath = String.format(validation, fieldName);
         if (cond.equals("have")){
             String validationText = get_xpath_text(errorXpath);
             assert validationText.contains(errorMsg) : "Assertion failed: validation message not tally";
@@ -236,21 +236,22 @@ public class CommonElement {
         }
     }
     public String getCalSelectedValue(){
-        return getXpathAttributeValue(selectedDateXpath,"aria-label");
+        return getXpathAttributeValue(selectedDate,"aria-label");
     }
 
     public void clickCalendar(String label){
-        WebElement calendarBtn = fluentWait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(folowBtnByText, label))));
+        WebElement calendarBtn = waitForElementToAppear(String.format(folowBtnByText, label));
         calendarBtn.click();
     }
-    public String getTodaysDate(){
+    public String getTodayDate(String format){
         LocalDate today = LocalDate.now();
-        // Define the format you want
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy"); // You can change the format here
-        // Format today's date
-        String formattedDate = today.format(formatter);
-        // Print the formatted date
-        return formattedDate;
+        DateTimeFormatter formatter;
+        if(format.equals("date")){
+             formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        }else{
+             formatter = DateTimeFormatter.ofPattern("EEE MMM dd yyyy");
+        }
+        return today.format(formatter);
     }
 
     public void selectDate(String dateLabel, String items) {
@@ -278,10 +279,8 @@ public class CommonElement {
     public boolean compareDate(String date1, String date2, String formatter1, String formatter2){
         DateTimeFormatter dateFormatter1 = DateTimeFormatter.ofPattern(formatter1);
         DateTimeFormatter dateFormatter2 = DateTimeFormatter.ofPattern(formatter2);
-        // Parse both dates
         LocalDate parsedDate1 = LocalDate.parse(date1, dateFormatter1);
         LocalDate parsedDate2 = LocalDate.parse(date2, dateFormatter2);
-        // Compare the two dates
         if (parsedDate1.isEqual(parsedDate2)) {
             System.out.println("The dates are the same.");
             return true;
@@ -292,5 +291,36 @@ public class CommonElement {
     public String getXpathAttributeValue(String xpath,String attr) {
         WebElement element = driver.findElement(By.xpath(xpath));
         return element.getAttribute(attr);
+    }
+    public Integer getElementCount(String xpath) {
+        List<WebElement> elements = driver.findElements(By.xpath(xpath));
+        return elements.size();
+    }
+    public void assertAriaDisabled(String xpath) {
+        List<WebElement> elements = driver.findElements(By.xpath(xpath));
+        for (WebElement element : elements) {
+            String ariaDisabledValue = element.getAttribute("aria-disabled");
+            Assert.assertEquals("Date is not in disabled", "true", ariaDisabledValue);
+        }
+    }
+    public WebElement waitForElementToAppear(String xpath) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));  // Wait for up to 10 seconds
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));  // Wait for elements to be present
+        return driver.findElement(By.xpath(xpath));  // Retrieve the elements
+    }
+    public void verifyFutureDateDisabled(){
+        String todayDay = getTodayDate("output");
+        String xpath = String.format(futureDisabledDay, todayDay);
+        String dayXpath = String.format(ariaLabelXpath, todayDay);
+        waitForElementToAppear(dayXpath);
+        Integer eleCount = getElementCount(xpath);
+        if(eleCount > 0){
+            assertAriaDisabled(xpath);
+        }else{
+            String nextButton = String.format(ariaLabelXpath, "Go forward 1 month");
+            clickByXpath(nextButton);
+            String allDay = String.format(allDisabledDay, todayDay);
+            assertAriaDisabled(allDay);
+        }
     }
 }

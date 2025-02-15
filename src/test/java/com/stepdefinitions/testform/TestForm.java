@@ -11,6 +11,7 @@ import com.pages.testform.TestFormPage;
 import java.util.List;
 import java.util.Map;
 import io.cucumber.datatable.DataTable;
+import org.openqa.selenium.WebElement;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 
@@ -176,26 +177,30 @@ public class TestForm {
     @Then("Verified today's date is selected from calendar")
     public void verifyTodayDate(){
         testFormPage.clickToExpandCalendar("Date of Birth");
-        String today = testFormPage.getTodaysDate();
+        String today = testFormPage.getTodayDate("date");
         String selectedDate = testFormPage.getCalSelectedValue();
         boolean result = testFormPage.compareDate(selectedDate, today, "EEE MMM dd yyyy", "dd/MM/yyyy");
         assert result : "Circled date is not the same as today's date";
-        System.out.println("Testttttttttttttttttttttt");
-        System.out.println(result);
     }
 
     @When("User select today's date")
     public void selectTodayDate(){
-        String today = testFormPage.getTodaysDate();
+        String today = testFormPage.getTodayDate("date");
         testFormPage.selectDateOfBirth(today);
     }
 
     @Then("Verified today's date is circled from calendar")
     public void verifyTodayDateCircled(){
-        String today = testFormPage.getTodaysDate();
+        String today = testFormPage.getTodayDate("date");
         String circledDay = testFormPage.getXpathAttributeValue("//button[contains(@class, 'css-9h1j97')]", "aria-label");
         boolean result = testFormPage.compareDate(circledDay, today, "EEE MMM dd yyyy", "dd/MM/yyyy");
         assert result : "Circled date is not the same as today's date";
+    }
+
+    @Then("Verified future date is disabled")
+    public void verifyFutureDateDisabled(){
+        testFormPage.checkCalendarDateIsDisabled();
+
     }
 
 }

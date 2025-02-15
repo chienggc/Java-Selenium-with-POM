@@ -4,6 +4,7 @@ import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
+import org.testng.annotations.DataProvider;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
@@ -22,4 +23,10 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
         snippets = CucumberOptions.SnippetType.CAMELCASE  // Ensures step definitions are in CamelCase format
 )
 public class TestRunner extends AbstractTestNGCucumberTests {
+        @Override
+        @DataProvider(parallel = true)
+        public Object[][] scenarios() {
+                return super.scenarios();
+        }
+
 }

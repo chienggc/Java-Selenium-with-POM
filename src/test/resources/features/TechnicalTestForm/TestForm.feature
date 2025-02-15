@@ -135,25 +135,30 @@ Feature: Technical Test Form
     When User enters address: "Jalan 123, 970111, state, Country"
     Then verified "Address" text area contains: "1234"
 
-  @positive
+  @calendar
   Scenario: TF00011 Ensure selected date is reflect correct on date field
     Given User navigates to test form page
     When User selects date of birth: "12/10/1995"
     Then verified "Date of Birth" text field contains: "12/10/1995"
 
-  @positive
+  @calendar
   Scenario: TF00012 Verify by default, today's date will be circled from calendar
     Given User navigates to test form page
     When User clicks on calendar button to expand calendar
     Then Verified today's date is circled from calendar
 
-  @positive
+  @calendar
   Scenario: TF00013 Ensure after date is selected, it will be highlighted
     Given User navigates to test form page
     When User select today's date
     Then Verified today's date is selected from calendar
 
+  @calendar
+  Scenario: TF00014 Verify by default, today's date will be circled from calendar
+    Given User navigates to test form page
+    When User clicks on calendar button to expand calendar
+    Then Verified future date is disabled
 
 
-  #Date restrictions (e.g., only past dates allowed).
   #File upload success and type validation (e.g., only PDFs allowed).
+  #selection field

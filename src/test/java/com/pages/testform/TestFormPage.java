@@ -88,4 +88,8 @@ public class TestFormPage extends CommonElement {
     public String getInputedText(String label, String field){
         return get_field_text(label , field);
     }
+
+    public void checkCalendarDateIsDisabled(){
+        verifyFutureDateDisabled();
+    }
 }
