@@ -40,10 +40,6 @@ public class BrowserSetup {
                 options.addArguments("--disable-web-security");
                 System.setProperty("webdriver.gecko.driver", "src/test/resources/drivers/geckodriver.exe");
                 driver = new FirefoxDriver(options);
-            } else {
-                // Default to Chrome if the browser type is not recognized
-                System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
-                driver = new ChromeDriver();
             }
 
             // Common timeout settings for all browsers
