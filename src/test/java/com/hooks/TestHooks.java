@@ -13,13 +13,12 @@ public class TestHooks {
     public void setUp() {
         driver = BrowserSetup.getDriver();
         System.out.println("Driver initialized: " + driver);
-        System.out.println("Running with tag: " + System.getProperty("cucumber.options"));
     }
 
     @After
     public void tearDown() {
         if (driver != null) {
-//            BrowserSetup.quitDriver();
+            BrowserSetup.quitDriver();
             System.out.println("Driver quit successfully.");
         } else {
             System.out.println("Driver already initialized: " + driver);
