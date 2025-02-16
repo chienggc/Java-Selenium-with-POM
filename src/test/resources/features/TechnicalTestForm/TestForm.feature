@@ -127,7 +127,7 @@ Feature: Technical Test Form
   Scenario: TF0009 Ensure input is stored in text area field correctly
     Given User navigates to test form page
     When User enters address: "Jalan 123, 970111, state, Country"
-    Then verified "Address" text area contains: "Jalan 123, 970111, st  ate, Country"
+    Then verified "Address" text area contains: "Jalan 123, 970111, state, Country"
 
   @failed
   Scenario: TF0010 Demo failed test cases
@@ -165,7 +165,7 @@ Feature: Technical Test Form
     When User uploads file: "git.exe"
     Then verified field: "Attachment" "have" validation message: "Your file's extension ending in *.exe is not allowed"
     When User uploads file: "morethan7mb.zip"
-    Then verified field: "Attachment" "have" validation message: "1You have exceeded the file size limit, please upload a file below 7 MB"
+    Then verified field: "Attachment" "have" validation message: "You have exceeded the file size limit, please upload a file below 7 MB"
 
 
 
