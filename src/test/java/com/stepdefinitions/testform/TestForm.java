@@ -155,10 +155,14 @@ public class TestForm {
         testFormPage.itemChecked(label, cond);
     }
 
-    @Then("verified {string} text field contains: {string}")
-    public void verifyTextFieldInputed(String label, String input) {
+    @Then("verified {string} text field {string}: {string}")
+    public void verifyTextFieldInputed(String label, String cond, String input) {
         String text = testFormPage.getInputedText(label, "textfield");
-        assert text.contains(input) : "Assertion failed: User input not tally with field Value";
+        if(cond.equals("contains")){
+            assert text.contains(input) : "Assertion failed: User input not tally with field Value";
+        }else{
+            assert text.isEmpty() : "Assertion failed: User input not tally with field Value";
+        }
 
     }
 
@@ -203,4 +207,8 @@ public class TestForm {
 
     }
 
+    @When("User removes selected location")
+    public void removeSelectedLocation(){
+        testFormPage.removeLocation("Clear selection", "button");
+    }
 }

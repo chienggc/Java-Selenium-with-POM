@@ -92,4 +92,8 @@ public class TestFormPage extends CommonElement {
     public void checkCalendarDateIsDisabled(){
         verifyFutureDateDisabled();
     }
+
+    public void removeLocation(String txt, String tag){
+        click_button_or_hyperlink(txt, tag);
+    }
 }

@@ -20,7 +20,6 @@ import java.util.Random;
 public class CommonElement {
 
     private static final String ariaLabelXpath = "//*[contains(@aria-label, '%s')]";
-    private static final String monthOrYearbutton = "//*[contains(@aria-label, '%s')]";
     private static final String monthOrYearOption = "//select//option[contains(text(), '%s')]";
     private static final String folowBtnByText = "//*[text()='%s']/following::button[1]";
     private static final String dateXpath = "//*[contains(@aria-label, '%s %s %s')]";
@@ -179,7 +178,7 @@ public class CommonElement {
     }
 
     public void click_button_or_hyperlink(String buttonText, String tag) {
-        String btnXpath = "//"+tag+"[text()='" + buttonText + "']";
+        String btnXpath = "//"+tag+"[text()='" + buttonText + "' or contains(@aria-label, '"+buttonText+"')]";
         WebElement btnElement = waitForElementToAppear(btnXpath);
         btnElement.click();
     }
@@ -194,6 +193,8 @@ public class CommonElement {
         String errorXpath = String.format(validation, fieldName);
         if (cond.equals("have")){
             String validationText = get_xpath_text(errorXpath);
+            System.out.println(validationText);
+            System.out.println(errorMsg);
             assert validationText.contains(errorMsg) : "Assertion failed: validation message not tally";
         }else{
             boolean hasErrorMsg = isElementNotVisible(errorXpath);
@@ -264,11 +265,11 @@ public class CommonElement {
         String fullMonth = convertMonth(month, true);
         WebElement calendarBtn = fluentWait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(folowBtnByText, dateLabel))));
         calendarBtn.click();
-        WebElement yearElement = fluentWait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(monthOrYearbutton, "Change displayed year"))));
+        WebElement yearElement = fluentWait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(ariaLabelXpath, "Change displayed year"))));
         yearElement.click();
         WebElement yearOptionElement = fluentWait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(monthOrYearOption, year))));
         yearOptionElement.click();
-        WebElement monthElement = fluentWait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(monthOrYearbutton, "Change displayed month"))));
+        WebElement monthElement = fluentWait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(ariaLabelXpath, "Change displayed month"))));
         monthElement.click();
         WebElement monthOptionElement = fluentWait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(monthOrYearOption, fullMonth))));
         monthOptionElement.click();

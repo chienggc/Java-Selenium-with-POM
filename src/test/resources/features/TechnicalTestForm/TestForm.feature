@@ -115,13 +115,13 @@ Feature: Technical Test Form
   Scenario: TF0008 Ensure input is stored in text field correctly
     Given User navigates to test form page
     When User enters first name: "John"
-    Then verified "First Name" text field contains: "John"
+    Then verified "First Name" text field "contains": "John"
     When User enters last name: "Doe"
-    Then verified "Last Name" text field contains: "Doe"
+    Then verified "Last Name" text field "contains": "Doe"
     When User enters email: "john.doe@example.com"
     Then verified "Email" text field contains: "john.doe@example.com"
     When User enters mobile num: "82221234"
-    Then verified "Mobile number" text field contains: "8222 1234"
+    Then verified "Mobile number" text field "contains": "8222 1234"
 
   @fieldValidation
   Scenario: TF0009 Ensure input is stored in text area field correctly
@@ -139,7 +139,7 @@ Feature: Technical Test Form
   Scenario: TF00011 Ensure selected date is reflect correct on date field
     Given User navigates to test form page
     When User selects date of birth: "12/10/1995"
-    Then verified "Date of Birth" text field contains: "12/10/1995"
+    Then verified "Date of Birth" text field "contains": "12/10/1995"
 
   @calendar
   Scenario: TF00012 Verify by default, today's date will be circled from calendar
@@ -167,6 +167,13 @@ Feature: Technical Test Form
     When User uploads file: "morethan7mb.zip"
     Then verified field: "Attachment" "have" validation message: "You have exceeded the file size limit, please upload a file below 7 MB"
 
+  @fieldvalidation
+  Scenario: TF0016 Ensure add or remove value from field, will reflected correctly on the field
+    Given User navigates to test form page
+    When User selects location: "North"
+    Then verified "Location" text field "contains": "North"
+    When User removes selected location
+    Then verified "Location" text field "does not contains": "North"
 
 
-  #selection field
+  #upload file add  have no validation message for valid file
