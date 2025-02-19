@@ -119,7 +119,7 @@ Feature: Technical Test Form
     When User enters last name: "Doe"
     Then verified "Last Name" text field "contains": "Doe"
     When User enters email: "john.doe@example.com"
-    Then verified "Email" text field contains: "john.doe@example.com"
+    Then verified "Email" text field "contains": "john.doe@example.com"
     When User enters mobile num: "82221234"
     Then verified "Mobile number" text field "contains": "8222 1234"
 
@@ -160,7 +160,7 @@ Feature: Technical Test Form
     Then Verified future date is disabled
 
   @fileuploadvalidation
-  Scenario: TF0015 
+  Scenario: TF0015 Verify invalid extension and file size will not allow to upload
     Given User navigates to test form page
     When User uploads file: "git.exe"
     Then verified field: "Attachment" "have" validation message: "Your file's extension ending in *.exe is not allowed"
@@ -176,4 +176,3 @@ Feature: Technical Test Form
     Then verified "Location" text field "does not contains": "North"
 
 
-  #upload file add  have no validation message for valid file

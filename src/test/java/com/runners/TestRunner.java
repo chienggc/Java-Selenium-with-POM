@@ -22,10 +22,5 @@ import org.junit.BeforeClass;
 )
 public class TestRunner {
 
-//        @BeforeClass
-//        public static void setUp() {
-//                String cucumberTags = System.getProperty("cucumber.options");
-//                System.setProperty("cucumber.options", cucumberTags);
-//
-//        }
+
 }
