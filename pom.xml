@@ -154,6 +154,13 @@
             <artifactId>cucumber-core</artifactId>
             <version>${cucumber-core.version}</version>
         </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>5.2.1</version> <!-- use the latest version -->
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -166,7 +173,7 @@
                 <version>${maven-surefire-plugin.version}</version>
                 <configuration>
                     <includes>
-                        <include>**/TestRunner.java</include> <!-- Include the TestRunner class -->
+                        <include>**/runners/*.java</include> <!-- Include the TestRunner class -->
                     </includes>
                     <systemProperties>
                         <property>
